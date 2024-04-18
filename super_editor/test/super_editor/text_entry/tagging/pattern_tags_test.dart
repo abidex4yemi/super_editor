@@ -37,7 +37,11 @@ void main() {
         await tester.placeCaretInParagraph("1", 0);
 
         // Compose a pattern tag.
-        await tester.typeImeText("#flutter");
+        // await tester.typeImeText("#flutter");
+        print("\n\n-------- TYPING # --------");
+        await tester.typeImeText("#");
+        print("\n\n-------- TYPING F --------");
+        await tester.typeImeText("F");
 
         // Ensure that the tag has a composing attribution.
         final text = SuperEditorInspector.findTextInComponent("1");
