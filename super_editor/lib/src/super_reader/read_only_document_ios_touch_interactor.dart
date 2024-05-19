@@ -472,49 +472,49 @@ class _SuperReaderIosDocumentTouchInteractorState
     }
 
     _globalTapDownOffset = details.globalPosition;
-    _tapDownLongPressTimer?.cancel();
-    _tapDownLongPressTimer = Timer(kLongPressTimeout, _onLongPressDown);
+    // _tapDownLongPressTimer?.cancel();
+    // _tapDownLongPressTimer = Timer(kLongPressTimeout, _onLongPressDown);
   }
 
   // Runs when a tap down has lasted long enough to signify a long-press.
-  void _onLongPressDown() {
-    final interactorOffset = interactorBox.globalToLocal(_globalTapDownOffset!);
-    final tapDownDocumentOffset =
-        _interactorOffsetToDocumentOffset(interactorOffset);
-    final tapDownDocumentPosition =
-        _docLayout.getDocumentPositionNearestToOffset(tapDownDocumentOffset);
-    if (tapDownDocumentPosition == null) {
-      return;
-    }
+  // void _onLongPressDown() {
+  //   final interactorOffset = interactorBox.globalToLocal(_globalTapDownOffset!);
+  //   final tapDownDocumentOffset =
+  //       _interactorOffsetToDocumentOffset(interactorOffset);
+  //   final tapDownDocumentPosition =
+  //       _docLayout.getDocumentPositionNearestToOffset(tapDownDocumentOffset);
+  //   if (tapDownDocumentPosition == null) {
+  //     return;
+  //   }
 
-    if (_isOverBaseHandle(interactorOffset) ||
-        _isOverExtentHandle(interactorOffset)) {
-      // Don't do anything for long presses over the handles, because we want the user
-      // to be able to drag them without worrying about how long they've pressed.
-      return;
-    }
+  //   if (_isOverBaseHandle(interactorOffset) ||
+  //       _isOverExtentHandle(interactorOffset)) {
+  //     // Don't do anything for long presses over the handles, because we want the user
+  //     // to be able to drag them without worrying about how long they've pressed.
+  //     return;
+  //   }
 
-    _globalDragOffset = _globalTapDownOffset;
-    _longPressStrategy = IosLongPressSelectionStrategy(
-      document: widget.document,
-      documentLayout: _docLayout,
-      select: _select,
-    );
-    final didLongPressSelectionStart = _longPressStrategy!.onLongPressStart(
-      tapDownDocumentOffset: tapDownDocumentOffset,
-    );
-    if (!didLongPressSelectionStart) {
-      _longPressStrategy = null;
-      return;
-    }
+  //   _globalDragOffset = _globalTapDownOffset;
+  //   _longPressStrategy = IosLongPressSelectionStrategy(
+  //     document: widget.document,
+  //     documentLayout: _docLayout,
+  //     select: _select,
+  //   );
+  //   final didLongPressSelectionStart = _longPressStrategy!.onLongPressStart(
+  //     tapDownDocumentOffset: tapDownDocumentOffset,
+  //   );
+  //   if (!didLongPressSelectionStart) {
+  //     _longPressStrategy = null;
+  //     return;
+  //   }
 
-    _placeFocalPointNearTouchOffset();
-    _controlsController!
-      ..hideToolbar()
-      ..showMagnifier();
+  //   _placeFocalPointNearTouchOffset();
+  //   _controlsController!
+  //     ..hideToolbar()
+  //     ..showMagnifier();
 
-    widget.focusNode.requestFocus();
-  }
+  //   widget.focusNode.requestFocus();
+  // }
 
   void _onTapUp(TapUpDetails details) {
     // Stop waiting for a long-press to start.
